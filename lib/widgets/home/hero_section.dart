@@ -74,9 +74,8 @@ class _HeroSectionState extends State<HeroSection> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final isMobile = ResponsiveUtils.isMobile(context);
-    final heroHeight = isMobile
-        ? (screenSize.height >= 720 ? screenSize.height : 720.0)
-        : (screenSize.height >= 660 ? screenSize.height : 660.0);
+    final minHeroHeight = isMobile ? 830.0 : 660.0;
+    final heroHeight = screenSize.height >= minHeroHeight ? screenSize.height : minHeroHeight;
 
     return Container(
       width: double.infinity,
@@ -151,11 +150,11 @@ class _HeroSectionState extends State<HeroSection> {
                 padding: EdgeInsets.only(
                   left: isMobile ? 20 : 48,
                   right: isMobile ? 20 : 48,
-                  top: isMobile ? 85 : 60,
-                  bottom: isMobile ? 45 : 60,
+                  top: isMobile ? 96 : 60,
+                  bottom: isMobile ? 48 : 60,
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: isMobile ? MainAxisAlignment.start : MainAxisAlignment.center,
                   crossAxisAlignment:
                       isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
                   children: [
@@ -165,10 +164,10 @@ class _HeroSectionState extends State<HeroSection> {
                         direction: RevealDirection.fade,
                         delay: const Duration(milliseconds: 100),
                         child: const ExperienceSealBadge(
-                          size: 80,
+                          size: 64,
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 8),
                     ],
 
                     // Large Editorial Heading
@@ -191,7 +190,7 @@ class _HeroSectionState extends State<HeroSection> {
                         ),
                       ),
                     ),
-                    SizedBox(height: isMobile ? 12 : 15),
+                    SizedBox(height: isMobile ? 10 : 15),
 
                     // Cuisines & Event Categories Details (Integrated Directly in Hero)
                     AnimatedReveal(
@@ -207,9 +206,9 @@ class _HeroSectionState extends State<HeroSection> {
                           Text(
                             AppConstants.appSubBrand,
                             style: GoogleFonts.plusJakartaSans(
-                              fontSize: isMobile ? 12 : 13.5,
+                              fontSize: isMobile ? 11.5 : 13.5,
                               fontWeight: FontWeight.w900,
-                              letterSpacing: isMobile ? 2.0 : 2.5,
+                              letterSpacing: isMobile ? 1.8 : 2.5,
                               color: const Color(0xFFE5A910),
                               shadows: [
                                 Shadow(
@@ -220,13 +219,13 @@ class _HeroSectionState extends State<HeroSection> {
                               ],
                             ),
                           ),
-                          const SizedBox(height: 6),
+                          SizedBox(height: isMobile ? 4 : 6),
 
                           // 2. CUISINES ROW (• ARABIC • INDIAN • CHINESE • CONTINENTAL FOOD)
                           Wrap(
                             alignment:
                                 isMobile ? WrapAlignment.center : WrapAlignment.start,
-                            spacing: isMobile ? 10 : 18,
+                            spacing: isMobile ? 8 : 18,
                             runSpacing: 4,
                             crossAxisAlignment: WrapCrossAlignment.center,
                             children: AppConstants.cuisines.map((cuisine) {
@@ -237,15 +236,15 @@ class _HeroSectionState extends State<HeroSection> {
                                     '• ',
                                     style: TextStyle(
                                       color: Color(0xFFE5A910),
-                                      fontSize: 13,
+                                      fontSize: 12,
                                       fontWeight: FontWeight.w900,
                                     ),
                                   ),
                                   Text(
                                     cuisine,
                                     style: GoogleFonts.plusJakartaSans(
-                                      fontSize: isMobile ? 10.5 : 12,
-                                      letterSpacing: 1.4,
+                                      fontSize: isMobile ? 10.0 : 12,
+                                      letterSpacing: isMobile ? 1.1 : 1.4,
                                       fontWeight: FontWeight.w700,
                                       color: const Color(0xFFF3ECE0),
                                       shadows: [
@@ -261,13 +260,13 @@ class _HeroSectionState extends State<HeroSection> {
                               );
                             }).toList(),
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: isMobile ? 6 : 8),
 
                           // 3. EVENT CATEGORIES GOLD STRIP
                           Container(
                             padding: EdgeInsets.symmetric(
-                              horizontal: isMobile ? 10 : 16,
-                              vertical: isMobile ? 5 : 6,
+                              horizontal: isMobile ? 8 : 16,
+                              vertical: isMobile ? 4 : 6,
                             ),
                             decoration: BoxDecoration(
                               color: const Color(0xFFE0A31B),
@@ -293,9 +292,9 @@ class _HeroSectionState extends State<HeroSection> {
                                   Text(
                                     AppConstants.eventTypesTagline[i],
                                     style: GoogleFonts.plusJakartaSans(
-                                      fontSize: isMobile ? 9.5 : 11,
+                                      fontSize: isMobile ? 9.0 : 11,
                                       fontWeight: FontWeight.w900,
-                                      letterSpacing: 1.2,
+                                      letterSpacing: isMobile ? 1.0 : 1.2,
                                       color: const Color(0xFF161410),
                                     ),
                                   ),
@@ -308,7 +307,7 @@ class _HeroSectionState extends State<HeroSection> {
                                         style: TextStyle(
                                           color: const Color(0xFF161410)
                                               .withValues(alpha: 0.45),
-                                          fontSize: isMobile ? 10 : 11.5,
+                                          fontSize: isMobile ? 9.5 : 11.5,
                                           fontWeight: FontWeight.w900,
                                         ),
                                       ),
@@ -320,7 +319,7 @@ class _HeroSectionState extends State<HeroSection> {
                         ],
                       ),
                     ),
-                    SizedBox(height: isMobile ? 16 : 20),
+                    SizedBox(height: isMobile ? 10 : 20),
 
                     // Animated Stats Counter (35+ Years of Experience, 99+ foods Items, 35+ Staffs)
                     AnimatedReveal(
@@ -328,23 +327,27 @@ class _HeroSectionState extends State<HeroSection> {
                       delay: const Duration(milliseconds: 280),
                       child: AnimatedStatsCard(isMobile: isMobile),
                     ),
-                    SizedBox(height: isMobile ? 18 : 22),
+                    SizedBox(height: isMobile ? 12 : 22),
 
                     // Action Buttons
                     AnimatedReveal(
                       direction: RevealDirection.slideUp,
                       delay: const Duration(milliseconds: 400),
                       child: Wrap(
-                        spacing: 16,
-                        runSpacing: 16,
+                        spacing: 12,
+                        runSpacing: isMobile ? 8 : 10,
                         alignment: isMobile ? WrapAlignment.center : WrapAlignment.start,
                         children: [
                           PrimaryButton(
                             text: 'PLAN YOUR EVENT',
+                            height: isMobile ? 46.0 : 52.0,
+                            horizontalPadding: isMobile ? 22.0 : 32.0,
                             onPressed: widget.onPlanEvent,
                           ),
                           SecondaryButton(
                             text: 'EXPLORE SERVICES',
+                            height: isMobile ? 46.0 : 52.0,
+                            horizontalPadding: isMobile ? 20.0 : 28.0,
                             isDarkSection: true,
                             onPressed: widget.onExploreServices,
                           ),
@@ -372,27 +375,37 @@ class _HeroSectionState extends State<HeroSection> {
 
             // Bottom Bar Indicators
             Positioned(
-              left: isMobile ? 20 : 64,
-              right: isMobile ? 20 : 64,
-              bottom: isMobile ? 20 : 28,
+              left: isMobile ? 16 : 64,
+              right: isMobile ? 16 : 64,
+              bottom: isMobile ? 14 : 28,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(
-                        Icons.south_rounded,
-                        color: AppColors.gold,
-                        size: 16,
+                  Flexible(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.south_rounded,
+                            color: AppColors.gold,
+                            size: isMobile ? 14 : 16,
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            'SCROLL TO EXPLORE',
+                            style: AppTextStyles.eyebrow(color: AppColors.champagne).copyWith(
+                              fontSize: isMobile ? 10.0 : 12.0,
+                              letterSpacing: isMobile ? 1.4 : 2.5,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 8),
-                      Text(
-                        'SCROLL TO EXPLORE',
-                        style: AppTextStyles.eyebrow(color: AppColors.champagne),
-                      ),
-                    ],
+                    ),
                   ),
+                  const SizedBox(width: 8),
                   // Background Images Slider Indicator Bars
                   Row(
                     mainAxisSize: MainAxisSize.min,
@@ -402,12 +415,15 @@ class _HeroSectionState extends State<HeroSection> {
                         onTap: () => _goToSlide(index),
                         behavior: HitTestBehavior.opaque,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: isMobile ? 2.5 : 4,
+                            vertical: 8,
+                          ),
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 350),
                             curve: Curves.easeOut,
-                            height: 4,
-                            width: isActive ? (isMobile ? 22 : 32) : 10,
+                            height: isMobile ? 3.5 : 4,
+                            width: isActive ? (isMobile ? 18 : 32) : (isMobile ? 7 : 10),
                             decoration: BoxDecoration(
                               color: isActive
                                   ? AppColors.gold

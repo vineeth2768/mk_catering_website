@@ -9,6 +9,7 @@ class SecondaryButton extends StatefulWidget {
   final bool isDarkSection;
   final bool fullWidth;
   final double height;
+  final double? horizontalPadding;
 
   const SecondaryButton({
     super.key,
@@ -18,6 +19,7 @@ class SecondaryButton extends StatefulWidget {
     this.isDarkSection = false,
     this.fullWidth = false,
     this.height = 52.0,
+    this.horizontalPadding,
   });
 
   @override
@@ -48,7 +50,10 @@ class _SecondaryButtonState extends State<SecondaryButton> {
           curve: Curves.easeOutCubic,
           height: widget.height,
           width: widget.fullWidth ? double.infinity : null,
-          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 12),
+          padding: EdgeInsets.symmetric(
+            horizontal: widget.horizontalPadding ?? 24.0,
+            vertical: 12,
+          ),
           decoration: BoxDecoration(
             color: _isHovered
                 ? (widget.isDarkSection
@@ -58,20 +63,24 @@ class _SecondaryButtonState extends State<SecondaryButton> {
             borderRadius: BorderRadius.circular(6),
             border: Border.all(color: borderColor, width: 1.5),
           ),
-          child: Row(
-            mainAxisSize: widget.fullWidth ? MainAxisSize.max : MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                widget.text.toUpperCase(),
-                style: AppTextStyles.button(color: textColor),
-              ),
-              if (widget.icon != null) ...[
-                const SizedBox(width: 8),
-                Icon(widget.icon, size: 16, color: textColor),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.center,
+            child: Row(
+              mainAxisSize: widget.fullWidth ? MainAxisSize.max : MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  widget.text.toUpperCase(),
+                  style: AppTextStyles.button(color: textColor),
+                ),
+                if (widget.icon != null) ...[
+                  const SizedBox(width: 8),
+                  Icon(widget.icon, size: 16, color: textColor),
+                ],
               ],
-            ],
+            ),
           ),
         ),
       ),

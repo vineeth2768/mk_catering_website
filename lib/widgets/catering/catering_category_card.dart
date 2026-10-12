@@ -26,41 +26,36 @@ class CateringCategoryCard extends StatelessWidget {
         builder: (context, constraints) {
           final isMobile = constraints.maxWidth < 768;
 
-          final imageWidget = Expanded(
-            flex: isMobile ? 0 : 6,
-            child: Stack(
-              children: [
-                ImageContainer(
-                  imageUrl: service.image,
-                  height: 380,
-                  width: double.infinity,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                Positioned(
-                  top: 20,
-                  left: 20,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: AppColors.charcoal,
-                      borderRadius: BorderRadius.circular(4),
-                      border: Border.all(color: AppColors.gold),
-                    ),
-                    child: Text(
-                      'SERVICE ${service.number}',
-                      style: AppTextStyles.button(color: AppColors.gold),
-                    ),
+          final imageWidget = Stack(
+            children: [
+              ImageContainer(
+                imageUrl: service.image,
+                height: isMobile ? 260 : 380,
+                width: double.infinity,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              Positioned(
+                top: 20,
+                left: 20,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: AppColors.charcoal,
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(color: AppColors.gold),
+                  ),
+                  child: Text(
+                    'SERVICE ${service.number}',
+                    style: AppTextStyles.button(color: AppColors.gold),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           );
 
-          final textWidget = Expanded(
-            flex: isMobile ? 0 : 6,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+          final textWidget = Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
                 Text(
                   service.title,
                   style: isMobile ? AppTextStyles.h1Mobile() : AppTextStyles.h1(),
@@ -110,8 +105,7 @@ class CateringCategoryCard extends StatelessWidget {
                   onPressed: onInquire,
                 ),
               ],
-            ),
-          );
+            );
 
           if (isMobile) {
             return Column(
@@ -127,8 +121,16 @@ class CateringCategoryCard extends StatelessWidget {
           return Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: isReversed
-                ? [textWidget, const SizedBox(width: 48), imageWidget]
-                : [imageWidget, const SizedBox(width: 48), textWidget],
+                ? [
+                    Expanded(flex: 6, child: textWidget),
+                    const SizedBox(width: 48),
+                    Expanded(flex: 6, child: imageWidget),
+                  ]
+                : [
+                    Expanded(flex: 6, child: imageWidget),
+                    const SizedBox(width: 48),
+                    Expanded(flex: 6, child: textWidget),
+                  ],
           );
         },
       ),

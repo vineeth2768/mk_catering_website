@@ -31,83 +31,92 @@ class AboutPreviewSection extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: AppSpacing.maxContentWidth),
-          child: Flex(
-            direction: isMobile ? Axis.vertical : Axis.horizontal,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Left Editorial Image Frame
-              Expanded(
-                flex: isMobile ? 0 : 5,
-                child: AnimatedReveal(
-                  direction: RevealDirection.slideRight,
-                  child: Stack(
-                    children: [
-                      const ImageContainer(
-                        imageUrl: AppImages.chefHospitality,
-                        height: 520,
-                        fit: BoxFit.cover,
-                      ),
-                      Positioned(
-                        bottom: -10,
-                        right: -10,
-                        child: Container(
-                          width: 140,
-                          height: 140,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.gold, width: 2),
-                          ),
+          child: Builder(
+            builder: (context) {
+              final leftImage = AnimatedReveal(
+                direction: RevealDirection.slideRight,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    ImageContainer(
+                      imageUrl: AppImages.chefHospitality,
+                      height: isMobile ? 360 : 520,
+                      fit: BoxFit.cover,
+                    ),
+                    Positioned(
+                      bottom: -10,
+                      right: -10,
+                      child: Container(
+                        width: isMobile ? 100 : 140,
+                        height: isMobile ? 100 : 140,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.gold, width: 2),
                         ),
                       ),
-                      Positioned(
-                        top: 24,
-                        right: 24,
-                        child: ExperienceSealBadge(size: 110),
-                      ),
-                    ],
-                  ),
+                    ),
+                    Positioned(
+                      top: isMobile ? 16 : 24,
+                      right: isMobile ? 16 : 24,
+                      child: ExperienceSealBadge(size: isMobile ? 85 : 110),
+                    ),
+                  ],
                 ),
-              ),
+              );
 
-              if (isMobile) const SizedBox(height: 40) else const SizedBox(width: 64),
+              final rightContent = AnimatedReveal(
+                direction: RevealDirection.slideLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'ABOUT MK CATERING',
+                      style: AppTextStyles.eyebrow(color: AppColors.deepGold),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      '35 YEARS OF HERITAGE.\nA LEGACY OF TASTE.',
+                      style: isMobile
+                          ? AppTextStyles.h1Mobile()
+                          : AppTextStyles.h1(),
+                    ),
+                    const SizedBox(height: 12),
+                    const GoldDivider(width: 60, showDiamond: true),
+                    const SizedBox(height: 16),
+                    Text(
+                      'For over 35 years, MK Catering has been built on a timeless tradition of authentic flavours, heartfelt hospitality, and a passion for exceptional food. What began with our grandfather’s vision and love for traditional cooking has grown into a legacy that blends the warmth of traditional recipes with modern luxury.',
+                      style: AppTextStyles.bodyLarge(),
+                    ),
+                    const SizedBox(height: 32),
 
-              // Right Editorial Content
-              Expanded(
-                flex: isMobile ? 0 : 6,
-                child: AnimatedReveal(
-                  direction: RevealDirection.slideLeft,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'ABOUT MK CATERING',
-                        style: AppTextStyles.eyebrow(color: AppColors.deepGold),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        '35 YEARS OF HERITAGE.\nA LEGACY OF TASTE.',
-                        style: isMobile
-                            ? AppTextStyles.h1Mobile()
-                            : AppTextStyles.h1(),
-                      ),
-                      const SizedBox(height: 12),
-                      const GoldDivider(width: 60, showDiamond: true),
-                      const SizedBox(height: 16),
-                      Text(
-                        'For over 35 years, MK Catering has been built on a timeless tradition of authentic flavours, heartfelt hospitality, and a passion for exceptional food. What began with our grandfather’s vision and love for traditional cooking has grown into a legacy that blends the warmth of traditional recipes with modern luxury.',
-                        style: AppTextStyles.bodyLarge(),
-                      ),
-                      const SizedBox(height: 32),
-
-                      SecondaryButton(
-                        text: 'DISCOVER OUR LEGACY',
-                        icon: Icons.arrow_forward_rounded,
-                        onPressed: onDiscoverMore,
-                      ),
-                    ],
-                  ),
+                    SecondaryButton(
+                      text: 'DISCOVER OUR LEGACY',
+                      icon: Icons.arrow_forward_rounded,
+                      onPressed: onDiscoverMore,
+                    ),
+                  ],
                 ),
-              ),
-            ],
+              );
+
+              if (isMobile) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    leftImage,
+                    const SizedBox(height: 40),
+                    rightContent,
+                  ],
+                );
+              }
+
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(flex: 5, child: leftImage),
+                  const SizedBox(width: 64),
+                  Expanded(flex: 6, child: rightContent),
+                ],
+              );
+            },
           ),
         ),
       ),

@@ -67,22 +67,26 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                     ),
                   ],
           ),
-          child: Row(
-            mainAxisSize: widget.fullWidth ? MainAxisSize.max : MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                widget.text.toUpperCase(),
-                style: AppTextStyles.button(color: AppColors.charcoal),
-              ),
-              const SizedBox(width: 8),
-              Icon(
-                widget.icon ?? Icons.arrow_forward_rounded,
-                size: 16,
-                color: AppColors.charcoal,
-              ),
-            ],
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.center,
+            child: Row(
+              mainAxisSize: widget.fullWidth ? MainAxisSize.max : MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  widget.text.toUpperCase(),
+                  style: AppTextStyles.button(color: AppColors.charcoal),
+                ),
+                const SizedBox(width: 8),
+                Icon(
+                  widget.icon ?? Icons.arrow_forward_rounded,
+                  size: 16,
+                  color: AppColors.charcoal,
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -1,11 +1,11 @@
 {
-    "name": "mk_website",
-    "short_name": "mk_website",
+    "name": "MK Catering",
+    "short_name": "MK Catering",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#0B0C10",
+    "theme_color": "#D4AF37",
+    "description": "MK Catering — Premium catering and event services, combining traditional hospitality with elegant celebrations.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

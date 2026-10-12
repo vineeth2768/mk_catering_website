@@ -168,20 +168,23 @@ class FoodShowcaseSection extends StatelessWidget {
                 cursor: SystemMouseCursors.click,
                 child: GestureDetector(
                   onTap: onExploreMenu,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'EXPLORE OUR FULL MENU',
-                        style: AppTextStyles.button(color: AppColors.gold),
-                      ),
-                      const SizedBox(width: 8),
-                      const Icon(
-                        Icons.arrow_forward_rounded,
-                        color: AppColors.gold,
-                        size: 18,
-                      ),
-                    ],
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'EXPLORE OUR FULL MENU',
+                          style: AppTextStyles.button(color: AppColors.gold),
+                        ),
+                        const SizedBox(width: 8),
+                        const Icon(
+                          Icons.arrow_forward_rounded,
+                          color: AppColors.gold,
+                          size: 18,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

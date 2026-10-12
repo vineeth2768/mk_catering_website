@@ -17,10 +17,10 @@ class AppTextStyles {
 
   static TextStyle displayHeroMobile({Color color = AppColors.charcoal}) {
     return GoogleFonts.cinzel(
-      fontSize: 32,
+      fontSize: 25,
       fontWeight: FontWeight.w700,
-      height: 1.25,
-      letterSpacing: 0.8,
+      height: 1.22,
+      letterSpacing: 0.6,
       color: color,
     );
   }

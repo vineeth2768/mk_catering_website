@@ -99,119 +99,127 @@ class AboutView extends StatelessWidget {
                         constraints: const BoxConstraints(maxWidth: AppSpacing.maxContentWidth),
                         child: Column(
                           children: [
-                            Flex(
-                              direction: isMobile ? Axis.vertical : Axis.horizontal,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Story Text Narrative
-                                Expanded(
-                                  flex: isMobile ? 0 : 7,
-                                  child: AnimatedReveal(
-                                    direction: RevealDirection.slideRight,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'OUR HERITAGE',
-                                          style: AppTextStyles.eyebrow(color: AppColors.deepGold),
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          '35 YEARS OF HERITAGE.\nA LEGACY OF TASTE.',
-                                          style: isMobile ? AppTextStyles.h1Mobile() : AppTextStyles.h1(),
-                                        ),
-                                        const SizedBox(height: 12),
-                                        const GoldDivider(width: 60, showDiamond: true),
-                                        const SizedBox(height: 24),
+                            Builder(
+                              builder: (context) {
+                                final storyText = AnimatedReveal(
+                                  direction: RevealDirection.slideRight,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'OUR HERITAGE',
+                                        style: AppTextStyles.eyebrow(color: AppColors.deepGold),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        '35 YEARS OF HERITAGE.\nA LEGACY OF TASTE.',
+                                        style: isMobile ? AppTextStyles.h1Mobile() : AppTextStyles.h1(),
+                                      ),
+                                      const SizedBox(height: 12),
+                                      const GoldDivider(width: 60, showDiamond: true),
+                                      const SizedBox(height: 24),
 
-                                        Text(
-                                          'For over 35 years, MK Catering has been built on a timeless tradition of authentic flavours, heartfelt hospitality, and a passion for exceptional food. What began with our grandfather’s vision, dedication, and love for traditional cooking has grown into a legacy that continues to bring people together through unforgettable dining experiences.',
-                                          style: AppTextStyles.bodyLarge(color: AppColors.charcoal),
-                                        ),
-                                        const SizedBox(height: 16),
-                                        Text(
-                                          'Inspired by his values and the rich culinary traditions he passed down, we believe that catering is more than preparing food — it is about creating memories, celebrating togetherness, and honouring every occasion with care and elegance.',
-                                          style: AppTextStyles.bodyMedium(),
-                                        ),
-                                        const SizedBox(height: 16),
-                                        Text(
-                                          'Today, MK Catering proudly blends the warmth of traditional recipes with the sophistication of modern luxury. From intimate family celebrations to grand weddings and prestigious events, we bring together authentic taste, premium presentation, meticulous attention to detail, and gracious service.',
-                                          style: AppTextStyles.bodyMedium(),
-                                        ),
-                                        const SizedBox(height: 16),
-                                        Text(
-                                          'While our style evolves with time, our foundation remains unchanged: the principles our grandfather taught us — quality, trust, dedication, and hospitality from the heart.',
-                                          style: AppTextStyles.bodyMedium(color: AppColors.charcoal),
-                                        ),
-                                      ],
-                                    ),
+                                      Text(
+                                        'For over 35 years, MK Catering has been built on a timeless tradition of authentic flavours, heartfelt hospitality, and a passion for exceptional food. What began with our grandfather’s vision, dedication, and love for traditional cooking has grown into a legacy that continues to bring people together through unforgettable dining experiences.',
+                                        style: AppTextStyles.bodyLarge(color: AppColors.charcoal),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      Text(
+                                        'Inspired by his values and the rich culinary traditions he passed down, we believe that catering is more than preparing food — it is about creating memories, celebrating togetherness, and honouring every occasion with care and elegance.',
+                                        style: AppTextStyles.bodyMedium(),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      Text(
+                                        'Today, MK Catering proudly blends the warmth of traditional recipes with the sophistication of modern luxury. From intimate family celebrations to grand weddings and prestigious events, we bring together authentic taste, premium presentation, meticulous attention to detail, and gracious service.',
+                                        style: AppTextStyles.bodyMedium(),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      Text(
+                                        'While our style evolves with time, our foundation remains unchanged: the principles our grandfather taught us — quality, trust, dedication, and hospitality from the heart.',
+                                        style: AppTextStyles.bodyMedium(color: AppColors.charcoal),
+                                      ),
+                                    ],
                                   ),
-                                ),
+                                );
 
-                                if (isMobile) const SizedBox(height: 40) else const SizedBox(width: 64),
-
-                                // Image Frame & Legacy Badge
-                                Expanded(
-                                  flex: isMobile ? 0 : 5,
-                                  child: AnimatedReveal(
-                                    direction: RevealDirection.slideLeft,
-                                    child: Column(
-                                      children: [
-                                        Stack(
-                                          children: [
-                                            ImageContainer(
-                                              imageUrl: AppImages.diningSetup,
-                                              height: 440,
-                                              width: double.infinity,
-                                              fit: BoxFit.cover,
-                                              borderRadius: BorderRadius.circular(8),
-                                            ),
-                                            Positioned(
-                                              bottom: 20,
-                                              left: 20,
-                                              child: Container(
-                                                padding: const EdgeInsets.symmetric(
-                                                    horizontal: 16, vertical: 10),
-                                                decoration: BoxDecoration(
-                                                  color: AppColors.charcoal,
-                                                  borderRadius: BorderRadius.circular(6),
-                                                  border: Border.all(color: AppColors.gold),
-                                                ),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      '35+',
-                                                      style: AppTextStyles.goldNumber(),
-                                                    ),
-                                                    const SizedBox(width: 12),
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: [
-                                                        Text(
-                                                          'YEARS OF LEGACY',
-                                                          style: AppTextStyles.eyebrow(
-                                                            color: AppColors.gold,
-                                                          ),
+                                final imageFrame = AnimatedReveal(
+                                  direction: RevealDirection.slideLeft,
+                                  child: Column(
+                                    children: [
+                                      Stack(
+                                        children: [
+                                          ImageContainer(
+                                            imageUrl: AppImages.diningSetup,
+                                            height: isMobile ? 320 : 440,
+                                            width: double.infinity,
+                                            fit: BoxFit.cover,
+                                            borderRadius: BorderRadius.circular(8),
+                                          ),
+                                          Positioned(
+                                            bottom: 20,
+                                            left: 20,
+                                            child: Container(
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 16, vertical: 10),
+                                              decoration: BoxDecoration(
+                                                color: AppColors.charcoal,
+                                                borderRadius: BorderRadius.circular(6),
+                                                border: Border.all(color: AppColors.gold),
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    '35+',
+                                                    style: AppTextStyles.goldNumber(),
+                                                  ),
+                                                  const SizedBox(width: 12),
+                                                  Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        'YEARS OF LEGACY',
+                                                        style: AppTextStyles.eyebrow(
+                                                          color: AppColors.gold,
                                                         ),
-                                                        Text(
-                                                          'Three Generations of Passion',
-                                                          style: AppTextStyles.bodySmall(
-                                                            color: AppColors.white,
-                                                          ),
+                                                      ),
+                                                      Text(
+                                                        'Three Generations of Passion',
+                                                        style: AppTextStyles.bodySmall(
+                                                          color: AppColors.white,
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
+                                );
+
+                                if (isMobile) {
+                                  return Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      storyText,
+                                      const SizedBox(height: 40),
+                                      imageFrame,
+                                    ],
+                                  );
+                                }
+
+                                return Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(flex: 7, child: storyText),
+                                    const SizedBox(width: 64),
+                                    Expanded(flex: 5, child: imageFrame),
+                                  ],
+                                );
+                              },
                             ),
 
                             const SizedBox(height: 64),

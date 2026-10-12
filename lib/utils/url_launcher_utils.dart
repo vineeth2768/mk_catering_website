@@ -7,7 +7,9 @@ class UrlLauncherUtils {
   static Future<void> openWhatsApp({String? customMessage}) async {
     final message = customMessage ?? AppConstants.defaultWhatsappMessage;
     final encodedMessage = Uri.encodeComponent(message);
-    final url = 'https://wa.me/${AppConstants.whatsappNumber}?text=$encodedMessage';
+    final cleanNumber =
+        AppConstants.whatsappNumber.replaceAll(RegExp(r'[^0-9]'), '');
+    final url = 'https://wa.me/$cleanNumber?text=$encodedMessage';
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);

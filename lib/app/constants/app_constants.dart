@@ -19,7 +19,8 @@ class AppConstants {
   static const String email = 'hello@mkcaters.com';
   static const String location = 'Kottakkal, Malappuram (Dt.), Kerala, India';
   static const String locationShort = 'Kottakkal, Malappuram (Dt.)';
-  static const String whatsappNumber = '919895800561';
+  static const String whatsappNumber = '917510202298';
+  static const String whatsappDisplay = '+91 7510202298';
   static const String defaultWhatsappMessage =
       'Hello MK Caters & Events, I would like to inquire about your catering & event services.';
 

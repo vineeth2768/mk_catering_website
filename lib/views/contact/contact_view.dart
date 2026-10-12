@@ -98,68 +98,57 @@ class ContactView extends StatelessWidget {
                     child: Center(
                       child: ConstrainedBox(
                         constraints: const BoxConstraints(maxWidth: AppSpacing.maxContentWidth),
-                        child: Flex(
-                          direction: isMobile ? Axis.vertical : Axis.horizontal,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Left Column: Contact Cards
-                            Expanded(
-                              flex: isMobile ? 0 : 5,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'CONTACT INFORMATION',
-                                    style: AppTextStyles.eyebrow(color: AppColors.deepGold),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    'We Would Love to Hear From You.',
-                                    style: isMobile ? AppTextStyles.h2() : AppTextStyles.h1(),
-                                  ),
-                                  const SizedBox(height: 12),
-                                  const GoldDivider(width: 60, showDiamond: true),
-                                  const SizedBox(height: 20),
-                                  Text(
-                                    'Planning a wedding, corporate conference, or private celebration? Reach out directly or fill out our enquiry form to schedule a tasting session.',
-                                    style: AppTextStyles.bodyLarge(),
-                                  ),
-                                  const SizedBox(height: 36),
+                        child: Builder(
+                          builder: (context) {
+                            final leftColumn = Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'CONTACT INFORMATION',
+                                  style: AppTextStyles.eyebrow(color: AppColors.deepGold),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  'We Would Love to Hear From You.',
+                                  style: isMobile ? AppTextStyles.h2() : AppTextStyles.h1(),
+                                ),
+                                const SizedBox(height: 12),
+                                const GoldDivider(width: 60, showDiamond: true),
+                                const SizedBox(height: 20),
+                                Text(
+                                  'Planning a wedding, corporate conference, or private celebration? Reach out directly or fill out our enquiry form to schedule a tasting session.',
+                                  style: AppTextStyles.bodyLarge(),
+                                ),
+                                const SizedBox(height: 36),
 
-                                  _ContactCard(
-                                    icon: Icons.phone_in_talk_rounded,
-                                    title: 'PHONE / WHATSAPP',
-                                    content: AppConstants.phone,
-                                    subtitle: 'Mon - Sun: 8:00 AM - 10:00 PM',
-                                    onTap: () => UrlLauncherUtils.openPhone(),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  _ContactCard(
-                                    icon: Icons.mark_email_read_rounded,
-                                    title: 'EMAIL INQUIRIES',
-                                    content: AppConstants.email,
-                                    subtitle: 'We reply within 24 hours',
-                                    onTap: () => UrlLauncherUtils.openEmail(),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  _ContactCard(
-                                    icon: Icons.location_on_rounded,
-                                    title: 'OFFICE & KITCHEN LOCATION',
-                                    content: AppConstants.location,
-                                    subtitle: 'Serving all across Kerala & neighbouring states',
-                                  ),
-                                ],
-                              ),
-                            ),
+                                _ContactCard(
+                                  icon: Icons.phone_in_talk_rounded,
+                                  title: 'PHONE / WHATSAPP',
+                                  content: AppConstants.phone,
+                                  subtitle: 'Mon - Sun: 8:00 AM - 10:00 PM',
+                                  onTap: () => UrlLauncherUtils.openPhone(),
+                                ),
+                                const SizedBox(height: 16),
+                                _ContactCard(
+                                  icon: Icons.mark_email_read_rounded,
+                                  title: 'EMAIL INQUIRIES',
+                                  content: AppConstants.email,
+                                  subtitle: 'We reply within 24 hours',
+                                  onTap: () => UrlLauncherUtils.openEmail(),
+                                ),
+                                const SizedBox(height: 16),
+                                _ContactCard(
+                                  icon: Icons.location_on_rounded,
+                                  title: 'OFFICE & KITCHEN LOCATION',
+                                  content: AppConstants.location,
+                                  subtitle: 'Serving all across Kerala & neighbouring states',
+                                ),
+                              ],
+                            );
 
-                            if (isMobile) const SizedBox(height: 48) else const SizedBox(width: 64),
-
-                            // Right Column: Enquiry Form
-                            Expanded(
-                              flex: isMobile ? 0 : 7,
-                              child: Container(
-                                padding: EdgeInsets.all(isMobile ? 24 : 40),
-                                decoration: BoxDecoration(
+                            final rightColumn = Container(
+                              padding: EdgeInsets.all(isMobile ? 24 : 40),
+                              decoration: BoxDecoration(
                                   color: AppColors.white,
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(color: AppColors.borderLight),
@@ -338,13 +327,32 @@ class ContactView extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                              ),
-                            ),
-                          ],
+                              );
+
+                              if (isMobile) {
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    leftColumn,
+                                    const SizedBox(height: 48),
+                                    rightColumn,
+                                  ],
+                                );
+                              }
+
+                              return Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(flex: 5, child: leftColumn),
+                                  const SizedBox(width: 64),
+                                  Expanded(flex: 7, child: rightColumn),
+                                ],
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ),
-                  ),
 
                   // FOOTER
                   const AppFooter(),

@@ -107,24 +107,28 @@ class _ServiceCardState extends State<ServiceCard> {
                       style: AppTextStyles.bodyMedium(color: AppColors.textMuted),
                     ),
                     const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Text(
-                          'EXPLORE SERVICE',
-                          style: AppTextStyles.button(
-                            color: _isHovered ? AppColors.deepGold : AppColors.charcoal,
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        children: [
+                          Text(
+                            'EXPLORE SERVICE',
+                            style: AppTextStyles.button(
+                              color: _isHovered ? AppColors.deepGold : AppColors.charcoal,
+                            ),
                           ),
-                        ),
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          margin: EdgeInsets.only(left: _isHovered ? 12 : 6),
-                          child: Icon(
-                            Icons.arrow_forward_rounded,
-                            size: 16,
-                            color: _isHovered ? AppColors.deepGold : AppColors.charcoal,
+                          AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            margin: EdgeInsets.only(left: _isHovered ? 12 : 6),
+                            child: Icon(
+                              Icons.arrow_forward_rounded,
+                              size: 16,
+                              color: _isHovered ? AppColors.deepGold : AppColors.charcoal,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
